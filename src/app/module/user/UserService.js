@@ -23,10 +23,15 @@ const updateAUser = async (id,data)=>{
      const result = await User.findByIdAndUpdate(id,{name,role}, {new:true})
      return result
 }
+const DeleteAUser = async (id) =>{
+     const result = await User.findByIdAndDelete(id)
+     return result
+}
 const UserServices = {
      signup,
      getAllUsers,
-     updateAUser
+     updateAUser,
+     DeleteAUser
 
 }
 export default UserServices;

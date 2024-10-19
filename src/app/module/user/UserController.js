@@ -26,11 +26,11 @@ const updateAUser = async (req,res,next) =>{
 }
 const DeleteAUser = async (req,res,next) =>{
      const id = req.params.id
-   
+    console.log(id)
      
      try {
-          const result = await UserServices.updateAUser(id)
-          res.status(200).json({message:"user updated ",result})
+          const result = await UserServices.DeleteAUser(id)
+          res.status(200).json({message:"user deleted ",result})
      } catch (error) {
           console.log(error)
           next(error)

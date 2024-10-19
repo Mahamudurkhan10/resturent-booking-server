@@ -30,7 +30,7 @@ const DeleteAUser = async (req,res,next) =>{
      
      try {
           const result = await UserServices.DeleteAUser(id)
-          res.status(200).json({message:"user deleted ",result})
+          res.status(200).json({message:"user deleted ",result})  
      } catch (error) {
           console.log(error)
           next(error)

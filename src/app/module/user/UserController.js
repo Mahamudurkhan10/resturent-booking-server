@@ -11,6 +11,18 @@ const signup = async (req,res,next) =>{
           
      }
 }
+const SignIn = async(req,res,next) =>{
+     try {
+          const result = await UserServices.SignIn(req.body)
+          const {password,...others} = result?.data.toObject()
+          res.status(200).json({message:"user SignIn succesfully",
+               success:true, data:others, token: result?.token
+          })
+     } catch (error) {
+          next(error)
+          
+     }
+}
 const updateAUser = async (req,res,next) =>{
      const id = req.params.id
      const data = req.body
@@ -51,6 +63,7 @@ const userController = {
      signup,
      getAllUsers,
      updateAUser,
-     DeleteAUser
+     DeleteAUser,
+     SignIn
 }
 export default userController

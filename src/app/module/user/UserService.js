@@ -1,6 +1,7 @@
+import Apperror from "../../error/AppError.js"
 import User from "./UserModel.js"
 import bcryipt from "bcrypt"
-
+import jwt from "jsonwebtoken"
 const signup = async (data)=>{
      const {password,email} = data
       const ExistUser = await User.findOne({email:email})
@@ -15,6 +16,26 @@ const signup = async (data)=>{
       const result = await newUser.save()
       return result
 } 
+const SignIn = async (data) =>{
+     const isUserExist = await User.findOne({email: data?.email})
+     if(!isUserExist){
+          throw new Apperror(404,"user not found")
+     }
+     const isPasswordMatch = await bcryipt.compare(data?.password,isUserExist?.password)
+     if(!isPasswordMatch){
+          throw new Apperror(403,"forbidden password")
+     }
+     const userdata = {
+          email: isUserExist?.email,
+          role: isUserExist?.role,
+          UserId: isUserExist?._id
+     }
+     const token = jwt.sign(userdata,'resturent123',{expiresIn:"7d"})
+     return{
+          data:isUserExist,
+          token
+     }
+}
 const getAllUsers = async () =>{
      return await User.find()
 }
@@ -31,7 +52,8 @@ const UserServices = {
      signup,
      getAllUsers,
      updateAUser,
-     DeleteAUser
+     DeleteAUser,
+     SignIn
 
 }
 export default UserServices;

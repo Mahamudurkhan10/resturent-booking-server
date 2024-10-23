@@ -23,7 +23,7 @@ const SignIn = async (data) =>{
      }
      const isPasswordMatch = await bcryipt.compare(data?.password,isUserExist?.password)
      if(!isPasswordMatch){
-          throw new Apperror(403,"forbidden password")
+          throw new Apperror(401,"forbidden password")
      }
      const userdata = {
           email: isUserExist?.email,

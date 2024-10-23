@@ -2,6 +2,7 @@ import ProductService from "./ProductService.js";
 
 const insertProduct = async (req,res,next)=>{
      const data = req.body;
+     console.log(data)
     try {
           const  result = await ProductService.insertProduct(data)
           res.status(200).json({message:"product inserted",result})

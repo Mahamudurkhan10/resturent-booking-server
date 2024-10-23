@@ -23,7 +23,7 @@ const deleteProduct = async (id) =>{
 const updateProduct = async (id,data) =>{
      const {foodName,foodCategory,foodImage,description } = data;
      return await Product.findByIdAndUpdate(id,{foodName,foodCategory,foodImage,description},{new:true})
-}
+} 
 const ProductService = {
      insertProduct,
      getAllProducts,

@@ -18,7 +18,7 @@ const singleProduct = async (id) =>{
      return await Product.findById(id)
 }
 const deleteProduct = async (id) =>{
-     return await Product.findByIdAndDelete(id)
+     return await Product.findByIdAndDelete(id)   
 }
 const updateProduct = async (id,data) =>{
      const {foodName,foodCategory,foodImage,description } = data;

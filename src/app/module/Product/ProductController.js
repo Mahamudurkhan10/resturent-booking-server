@@ -11,9 +11,20 @@ const insertProduct = async (req,res,next)=>{
      
     }
 }
-const getAllProducts = async (req,res,next) =>{
+const deleteAll = async (req,res,next) =>{
      try {
-          const result = await ProductService.getAllProducts()
+          const result = await ProductService.deleteAll()
+          res.status(200).json({message:"all products deleted successfully",result})
+     } catch (error) {
+          next(error)
+          
+     }
+}
+const getAllProducts = async (req,res,next) =>{
+     const query = req.query
+     console.log(query)
+     try {
+          const result = await ProductService.getAllProducts(query)
           res.status(200).json({message:"all products retrieved succesfull ",result})
      } catch (error) {
           next(error)
@@ -56,6 +67,7 @@ const ProductController = {
      getAllProducts,
      singleProduct,
      deleteProduct,
-     updateProduct
+     updateProduct,
+     deleteAll
 }
 export default ProductController

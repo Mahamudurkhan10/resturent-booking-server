@@ -1,37 +1,18 @@
-import Booking from "./BookingModel.js"
+import Apperror from "../../error/AppError.js"
+import { Table } from "../Table/tableModel.js"
+import { Booking } from "./BookingModel.js"
 
-const CreateBooking = async (data) =>{
-   
-          const result = await Booking.create(data)
-          return result
-    
+const insertBooking = async (data) =>{
+     const findTable = await Table.findOne({person:{ $gte: data.person}})
+     if(!findTable){
+          throw new Apperror(404,"not found")
+     }
+     const result = await Booking.create(data)     
+     return result 
+
 }
 
-const getAllBooking = async () =>{
-     return await Booking.find().populate({path:"customer", select:"name email "})
-}
-const myBooking = async(id) => {
-     
-     const result = await Booking.find({customer:id})
-     console.log(result)
-     return result
-}
-const updateBooking = async (id,data) =>{
-     const result = await Booking.findByIdAndUpdate(id,{...data},{new:true})
-     return result
-}
-const deleteBooking = async (id) =>{
-     return await Booking.findByIdAndDelete(id)
-}
-const singleBooking = async (id) =>{
-     return await Booking.findById(id)
-}
 const BookingService = {
-     CreateBooking,
-     getAllBooking,
-     myBooking,
-     updateBooking,
-     deleteBooking,
-     singleBooking
+     insertBooking
 }
 export default BookingService

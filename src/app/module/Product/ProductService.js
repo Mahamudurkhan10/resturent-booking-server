@@ -17,6 +17,7 @@ const getAllProducts = async (data) => {
 
      console.log(foodCategory)
      let query = {}
+     
      if (foodCategory) {
           const category = await Category.findOne({ title: foodCategory.toLowerCase() })
           console.log(category)
@@ -26,6 +27,7 @@ const getAllProducts = async (data) => {
           }
           query.foodCategory = category._id;
      }
+     console.log(query)
      return await Product.find(query).populate({ path: "foodCategory", select: "title" })
 }
 const singleProduct = async (id) => {

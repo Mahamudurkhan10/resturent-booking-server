@@ -58,12 +58,22 @@ const getAllUsers = async (req,res,next) =>{
           
      }
 }
+const deleteMany = async (req,res,next) =>{
+     try {
+          const result = await UserServices.deleteMany()
+          res.status(200).json( {message: "all users deleted successfully", success:true, result})
+     } catch (error) {
+          next()
+          
+     }
+}
 
 const userController = {
      signup,
      getAllUsers,
      updateAUser,
      DeleteAUser,
-     SignIn
+     SignIn,
+     deleteMany
 }
 export default userController

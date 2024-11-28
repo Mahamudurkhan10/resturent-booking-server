@@ -48,12 +48,18 @@ const DeleteAUser = async (id) =>{
      const result = await User.findByIdAndDelete(id)
      return result
 }
+const deleteMany = async () =>{
+     const result = await User.deleteMany()
+     return result
+}
 const UserServices = {
      signup,
      getAllUsers,
      updateAUser,
      DeleteAUser,
-     SignIn
+     SignIn,
+     deleteMany
 
 }
+
 export default UserServices;
